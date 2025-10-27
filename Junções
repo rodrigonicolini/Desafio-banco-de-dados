@@ -1,0 +1,6 @@
+-- Mostrar nome do cliente, forma de pagamento e status da entrega
+SELECT c.nome, p.forma_pagamento, e.status
+FROM Cliente c
+JOIN Conta ct ON c.id_cliente = ct.id_cliente
+JOIN Pagamento p ON ct.id_conta = p.id_conta
+JOIN Entrega e ON ct.id_conta = e.id_conta;
