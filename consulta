@@ -1,0 +1,2 @@
+-- Quais são os nomes dos clientes cadastrados?
+SELECT nome FROM Cliente;
