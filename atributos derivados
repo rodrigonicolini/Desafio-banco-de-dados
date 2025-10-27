@@ -1,0 +1,4 @@
+-- Valor total pago por cada conta
+SELECT id_conta, SUM(valor) AS total_pago
+FROM Pagamento
+GROUP BY id_conta;
