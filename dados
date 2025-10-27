@@ -1,0 +1,17 @@
+-- Clientes
+INSERT INTO Cliente VALUES (1, 'PF', 'João Silva', '123.456.789-00');
+INSERT INTO Cliente VALUES (2, 'PJ', 'Empresa XYZ Ltda', '12.345.678/0001-99');
+
+-- Contas
+INSERT INTO Conta VALUES (101, 1, '2023-01-10');
+INSERT INTO Conta VALUES (102, 2, '2023-02-15');
+
+-- Pagamentos
+INSERT INTO Pagamento VALUES (201, 101, 'Cartão de Crédito', 150.00, '2023-01-11');
+INSERT INTO Pagamento VALUES (202, 101, 'Pix', 50.00, '2023-01-12');
+INSERT INTO Pagamento VALUES (203, 102, 'Boleto', 300.00, '2023-02-16');
+
+-- Entregas
+INSERT INTO Entrega VALUES (301, 101, 'Entregue', 'ABC123456BR', '2023-01-15');
+INSERT INTO Entrega VALUES (302, 102, 'Em trânsito', 'XYZ987654BR', NULL);
+
