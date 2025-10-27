@@ -1,0 +1,91 @@
+-- 1. CRIAÇÃO DO ESQUEMA
+
+CREATE TABLE Cliente (
+    id_cliente INT PRIMARY KEY,
+    tipo_cliente CHAR(2) CHECK (tipo_cliente IN ('PF', 'PJ')),
+    nome VARCHAR(100),
+    cpf_cnpj VARCHAR(20) UNIQUE
+);
+
+CREATE TABLE Conta (
+    id_conta INT PRIMARY KEY,
+    id_cliente INT,
+    data_criacao DATE,
+    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
+);
+
+CREATE TABLE Pagamento (
+    id_pagamento INT PRIMARY KEY,
+    id_conta INT,
+    forma_pagamento VARCHAR(50),
+    valor DECIMAL(10,2),
+    data_pagamento DATE,
+    FOREIGN KEY (id_conta) REFERENCES Conta(id_conta)
+);
+
+CREATE TABLE Entrega (
+    id_entrega INT PRIMARY KEY,
+    id_conta INT,
+    status VARCHAR(50),
+    codigo_rastreio VARCHAR(50),
+    data_entrega DATE,
+    FOREIGN KEY (id_conta) REFERENCES Conta(id_conta)
+);
+
+-- 2. INSERÇÃO DE DADOS
+
+INSERT INTO Cliente VALUES 
+(1, 'PF', 'João Silva', '123.456.789-00'),
+(2, 'PJ', 'Empresa XYZ Ltda', '12.345.678/0001-99'),
+(3, 'PF', 'Maria Oliveira', '987.654.321-00'),
+(4, 'PJ', 'Tech Solutions MEI', '98.765.432/0001-88');
+
+INSERT INTO Conta VALUES 
+(101, 1, '2023-01-10'),
+(102, 2, '2023-02-15'),
+(103, 3, '2023-03-20'),
+(104, 4, '2023-04-05');
+
+INSERT INTO Pagamento VALUES 
+(201, 101, 'Cartão de Crédito', 150.00, '2023-01-11'),
+(202, 101, 'Pix', 50.00, '2023-01-12'),
+(203, 102, 'Boleto', 300.00, '2023-02-16'),
+(204, 103, 'Cartão de Débito', 120.00, '2023-03-21'),
+(205, 104, 'Transferência Bancária', 500.00, '2023-04-06'),
+(206, 104, 'Pix', 200.00, '2023-04-07');
+
+INSERT INTO Entrega VALUES 
+(301, 101, 'Entregue', 'ABC123456BR', '2023-01-15'),
+(302, 102, 'Em trânsito', 'XYZ987654BR', NULL),
+(303, 103, 'Pendente', 'LMN456789BR', NULL),
+(304, 104, 'Entregue', 'QRS321654BR', '2023-04-10');
+
+-- 3. CONSULTAS SQL
+
+-- Recuperações simples com SELECT
+SELECT nome FROM Cliente;
+
+-- Filtros com WHERE
+SELECT * FROM Entrega WHERE status = 'Entregue';
+
+-- Expressões para atributos derivados
+SELECT id_conta, SUM(valor) AS total_pago
+FROM Pagamento
+GROUP BY id_conta;
+
+-- Ordenação com ORDER BY
+SELECT * FROM Pagamento
+ORDER BY valor DESC;
+
+-- Filtros aos grupos com HAVING
+SELECT id_conta, SUM(valor) AS total_pago
+FROM Pagamento
+GROUP BY id_conta
+HAVING SUM(valor) > 100;
+
+-- Junções entre tabelas
+SELECT c.nome, p.forma_pagamento, e.status
+FROM Cliente c
+JOIN Conta ct ON c.id_cliente = ct.id_cliente
+JOIN Pagamento p ON ct.id_conta = p.id_conta
+JOIN Entrega e ON ct.id_conta = e.id_conta;
