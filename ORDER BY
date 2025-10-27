@@ -1,1 +1,4 @@
- atributos derivados
+-- Listar pagamentos ordenados por valor decrescente
+SELECT * FROM Pagamento
+ORDER BY valor DESC;
+
