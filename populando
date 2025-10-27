@@ -1,0 +1,29 @@
+-- Populando tabela Cliente
+INSERT INTO Cliente (id_cliente, tipo_cliente, nome, cpf_cnpj) VALUES
+(1, 'PF', 'João Silva', '123.456.789-00'),
+(2, 'PJ', 'Empresa XYZ Ltda', '12.345.678/0001-99'),
+(3, 'PF', 'Maria Oliveira', '987.654.321-00'),
+(4, 'PJ', 'Tech Solutions MEI', '98.765.432/0001-88');
+
+-- Populando tabela Conta
+INSERT INTO Conta (id_conta, id_cliente, data_criacao) VALUES
+(101, 1, '2023-01-10'),
+(102, 2, '2023-02-15'),
+(103, 3, '2023-03-20'),
+(104, 4, '2023-04-05');
+
+-- Populando tabela Pagamento
+INSERT INTO Pagamento (id_pagamento, id_conta, forma_pagamento, valor, data_pagamento) VALUES
+(201, 101, 'Cartão de Crédito', 150.00, '2023-01-11'),
+(202, 101, 'Pix', 50.00, '2023-01-12'),
+(203, 102, 'Boleto', 300.00, '2023-02-16'),
+(204, 103, 'Cartão de Débito', 120.00, '2023-03-21'),
+(205, 104, 'Transferência Bancária', 500.00, '2023-04-06'),
+(206, 104, 'Pix', 200.00, '2023-04-07');
+
+-- Populando tabela Entrega
+INSERT INTO Entrega (id_entrega, id_conta, status, codigo_rastreio, data_entrega) VALUES
+(301, 101, 'Entregue', 'ABC123456BR', '2023-01-15'),
+(302, 102, 'Em trânsito', 'XYZ987654BR', NULL),
+(303, 103, 'Pendente', 'LMN456789BR', NULL),
+(304, 104, 'Entregue', 'QRS321654BR', '2023-04-10');
