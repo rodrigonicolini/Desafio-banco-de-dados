@@ -1,0 +1,5 @@
+-- Contas que tiveram pagamentos acima de R$100
+SELECT id_conta, SUM(valor) AS total_pago
+FROM Pagamento
+GROUP BY id_conta
+HAVING SUM(valor) > 100;
