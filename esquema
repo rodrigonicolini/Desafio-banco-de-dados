@@ -1,0 +1,35 @@
+-- Tabela de Clientes
+CREATE TABLE Cliente (
+    id_cliente INT PRIMARY KEY,
+    tipo_cliente CHAR(2) CHECK (tipo_cliente IN ('PF', 'PJ')),
+    nome VARCHAR(100),
+    cpf_cnpj VARCHAR(20) UNIQUE
+);
+
+-- Tabela de Contas
+CREATE TABLE Conta (
+    id_conta INT PRIMARY KEY,
+    id_cliente INT,
+    data_criacao DATE,
+    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
+);
+
+-- Tabela de Pagamentos
+CREATE TABLE Pagamento (
+    id_pagamento INT PRIMARY KEY,
+    id_conta INT,
+    forma_pagamento VARCHAR(50),
+    valor DECIMAL(10,2),
+    data_pagamento DATE,
+    FOREIGN KEY (id_conta) REFERENCES Conta(id_conta)
+);
+
+-- Tabela de Entregas
+CREATE TABLE Entrega (
+    id_entrega INT PRIMARY KEY,
+    id_conta INT,
+    status VARCHAR(50),
+    codigo_rastreio VARCHAR(50),
+    data_entrega DATE,
+    FOREIGN KEY (id_conta) REFERENCES Conta(id_conta)
+);
