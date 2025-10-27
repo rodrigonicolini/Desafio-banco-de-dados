@@ -1,0 +1,3 @@
+-- Quais entregas já foram concluídas?
+SELECT * FROM Entrega
+WHERE status = 'Entregue';
